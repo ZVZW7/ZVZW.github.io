@@ -8,22 +8,19 @@
 
 /* ===== reset & layout ===== */
 *{margin:0;padding:0;box-sizing:border-box;}
-
 body{
   font-family:'Segoe UI',sans-serif;
   line-height:1.6;
   background:linear-gradient(180deg,var(--clr-bg),var(--clr-bg-light));
   color:var(--clr-text);
   min-height:100vh;
-  display:flex;
-  flex-direction:column;
+  display:flex;flex-direction:column;
 }
 
 /* ===== шапка ===== */
 .site-header{padding:1rem;text-align:center;}
-
 .banner{
-  /* Мобильный портрет: полноэкранный «кинозум» */
+  /* ①— мобильный и узкие экраны */
   width:100%;
   aspect-ratio:3/2;
   height:auto;
@@ -31,14 +28,12 @@ body{
   border-radius:1rem;
   box-shadow:0 4px 12px rgba(0,0,0,.4);
 }
+h1{margin-top:.5rem;color:var(--clr-accent);}
 
 /* ===== основной контент ===== */
-h1{margin-top:.5rem;color:var(--clr-accent);}
 main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
-
 .works h2{margin-bottom:1rem;}
 .work-list{list-style:none;display:grid;gap:1rem;}
-
 .work-list a{
   display:block;padding:1rem 1.25rem;
   background:rgba(0,0,0,.2);
@@ -53,21 +48,21 @@ main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
 footer{text-align:center;padding:1rem;font-size:.875rem;}
 
 /* ===== брейк-поинты ===== */
-@media (min-width:768px){                 /* планшет и выше */
+@media (min-width:768px){                /* планшет */
   .work-list{grid-template-columns:repeat(2,1fr);}
-
-  .banner{
-    /* ограничиваем высоту и позволяем ширине сжиматься */
-    max-height:clamp(320px,60vh,600px);  /* мин 320 px, «идеал» 60 vh, макс 600 px */
-    width:auto;                          /* ширина теперь не обязана быть 100 %  */
-    max-width:90%;                       /* оставляем поля по краям              */
-    object-fit:contain;                  /* показываем картину целиком           */
-    margin-inline:auto;                  /* центрируем горизонтально             */
-  }
 }
 
 @media (min-width:1024px){               /* десктоп */
   .work-list{grid-template-columns:repeat(3,1fr);}
+
+  /* ②— ограничиваем баннер */
+  .banner{
+    width:90%;
+    max-width:1200px;                    /* не шире 1200 px */
+    max-height:clamp(300px,50vh,500px);  /* гибкий «потолок» */
+    object-fit:contain;                  /* показываем без кропа */
+    margin-inline:auto;                  /* центрируем */
+  }
 }
 
 /* ===== автоматическая светлая тема ===== */
@@ -77,7 +72,6 @@ footer{text-align:center;padding:1rem;font-size:.875rem;}
     --clr-bg-light:#DCC6A1;
     --clr-text:#21160A;
   }
-
   body{background:var(--clr-bg);}
   .work-list a{
     background:rgba(255,255,255,.7);
@@ -85,4 +79,5 @@ footer{text-align:center;padding:1rem;font-size:.875rem;}
   }
   .work-list a:hover{background:rgba(255,255,255,.9);}
 }
+
 
