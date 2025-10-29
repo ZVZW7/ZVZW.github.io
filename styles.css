@@ -1,4 +1,4 @@
-/* ===== базовые переменные цвета (тёмная тема) ===== */
+/* ===== базовые переменные (тёмная тема) ===== */
 :root{
   --clr-bg:#36230B;
   --clr-bg-light:#59401A;
@@ -20,17 +20,17 @@ body{
 /* ===== шапка ===== */
 .site-header{padding:1rem;text-align:center;}
 .banner{
-  /* мобильный портрет (по умолчанию) */
+  /* 1. Базовое (моб-портрет): hero во всю ширину, лёгкий кроп  */
   width:100%;
-  aspect-ratio:3/2;           /* держим пропорцию */
+  aspect-ratio:3/2;            /* держим пропорцию — свойство поддерживается всеми актуальными браузерами :contentReference[oaicite:2]{index=2} */
   height:auto;
-  object-fit:cover;           /* лёгкий кроп, визуальный эффект */
+  object-fit:cover;            /* cover заполняет блок без «пустых писем» :contentReference[oaicite:3]{index=3} */
   border-radius:1rem;
   box-shadow:0 4px 12px rgba(0,0,0,.4);
 }
 h1{margin-top:.5rem;color:var(--clr-accent);}
 
-/* ===== основной контент ===== */
+/* ===== контент ===== */
 main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
 .works h2{margin-bottom:1rem;}
 .work-list{list-style:none;display:grid;gap:1rem;}
@@ -47,21 +47,16 @@ main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
 /* ===== футер ===== */
 footer{text-align:center;padding:1rem;font-size:.875rem;}
 
-/* ===== брейк-пойнты ===== */
+/* ===== брейк-поинты ===== */
 @media (min-width:768px){                    /* планшет */
   .work-list{grid-template-columns:repeat(2,1fr);}
 }
 
-/* ① Телефон / планшет в горизонтали */
+/* 2. Телефон / планшет в горизонтали */
 @media (orientation: landscape) and (max-width:1023px){
   .banner{
-    /* убираем жёсткую ширину и пропорцию */
-    width:auto;
-    max-width:90vw;           /* не шире экрана */
-    height:50vh;              /* не выше половины экрана */
-    aspect-ratio:auto;        /* позволяем естественной высоте */
-    object-fit:contain;       /* без кропа, поля исчезают */
-    margin-inline:auto;       /* центрируем */
+    height:50vh;             /* не выше половины экрана :contentReference[oaicite:4]{index=4} */
+    object-fit:cover;        /* заполняем без полей */
   }
 }
 
@@ -69,10 +64,10 @@ footer{text-align:center;padding:1rem;font-size:.875rem;}
   .work-list{grid-template-columns:repeat(3,1fr);}
   .banner{
     width:90%;
-    max-width:1200px;                       /* предел по ширине */
-    max-height:clamp(300px,50vh,500px);     /* гибкий «потолок» */
-    object-fit:contain;                     /* картинка целиком */
-    margin-inline:auto;                     /* центрируем */
+    max-width:1200px;                       /* рекомендуемый предел для hero :contentReference[oaicite:5]{index=5} */
+    max-height:clamp(300px,50vh,500px);     /* гибкий «потолок» через clamp() :contentReference[oaicite:6]{index=6} */
+    object-fit:cover;                       /* лёгкий кроп предпочительнее пустых полей */
+    margin-inline:auto;
   }
 }
 
