@@ -1,35 +1,31 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"><!-- mobile-first  -->
-  <title>Портфолио</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Тихий вечер в избе</title>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
-
 <body>
   <header class="site-header">
-    <div class="overlay">
-      <h1>Проекты</h1>
-    </div>
+    <img src="images/banner.jpg" alt="Кот, печь и старый компьютер" class="banner"/>
+    <h1>Моё портфолио</h1>
   </header>
 
-  <!-- структура та же, отличие только в <main> -->
   <main>
-    <article class="work-details">
-      <h2>Четки</h2>
-      <picture>
-        <!-- при желании добавьте srcset для Hi-DPI экрана -->
-        <img src="images/work1-full.jpg" alt="Название работы крупно">
-      </picture>
-      <p>Короткое описание проекта, задачи, технологии…</p>
-      <a href="index.html">← Назад к списку</a>
+    <article class="work-detail">
+      <h2>Тихий вечер в избе</h2>
+      <figure>
+        <img src="images/banner.jpg" alt="Картина «Тихий вечер в избе»"/>
+        <figcaption>Картина 2023 г.</figcaption>
+      </figure>
+      <p>Небольшое описание проекта: сочетание традиционного русского быта и ретро-техники создаёт уютный
+         винтажный настрой.</p>
+      <a href="index.html" class="back-link">&larr; К списку работ</a>
     </article>
   </main>
 
-
-  <footer class="site-footer">
-    <p>&copy; 2025 ZVZW</p>
-  </footer>
+  <footer>&copy; 2025</footer>
 </body>
 </html>
+
