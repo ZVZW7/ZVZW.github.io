@@ -1,4 +1,4 @@
-/* ===== базовые переменные цвета (тёмная тема) ===== */
+/* ===== базовые переменные (тёмная тема) ===== */
 :root{
   --clr-bg:#36230B;
   --clr-bg-light:#59401A;
@@ -20,11 +20,11 @@ body{
 /* ===== шапка ===== */
 .site-header{padding:1rem;text-align:center;}
 .banner{
-  /* ①— мобильный и узкие экраны */
+  /* базовое поведение — мобильный портрет: hero во всю ширину */
   width:100%;
-  aspect-ratio:3/2;
+  aspect-ratio:3/2;          /* держим пропорцию ⚙️  MDN :contentReference[oaicite:0]{index=0} */
   height:auto;
-  object-fit:cover;
+  object-fit:cover;          /* лёгкий кроп — UX-стандарт для hero :contentReference[oaicite:1]{index=1} */
   border-radius:1rem;
   box-shadow:0 4px 12px rgba(0,0,0,.4);
 }
@@ -47,25 +47,34 @@ main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
 /* ===== футер ===== */
 footer{text-align:center;padding:1rem;font-size:.875rem;}
 
-/* ===== брейк-поинты ===== */
-@media (min-width:768px){                /* планшет */
+/* ===== брейк-пойнты ===== */
+@media (min-width:768px){                     /* планшет */
   .work-list{grid-template-columns:repeat(2,1fr);}
 }
 
-@media (min-width:1024px){               /* десктоп */
-  .work-list{grid-template-columns:repeat(3,1fr);}
-
-  /* ②— ограничиваем баннер */
+/* ① Телефон/планшет в горизонтали: высота ≤ 50 vh, без кропа */
+@media (orientation: landscape) and (max-width:1023px){
+  /* media-feature orientation поддерживается c 2015 г. :contentReference[oaicite:2]{index=2} */
   .banner{
-    width:90%;
-    max-width:1200px;                    /* не шире 1200 px */
-    max-height:clamp(300px,50vh,500px);  /* гибкий «потолок» */
-    object-fit:contain;                  /* показываем без кропа */
-    margin-inline:auto;                  /* центрируем */
+    max-height:50vh;          /* не больше половины экрана  :contentReference[oaicite:3]{index=3} */
+    object-fit:contain;       /* показываем картину целиком :contentReference[oaicite:4]{index=4} */
   }
 }
 
-/* ===== автоматическая светлая тема ===== */
+@media (min-width:1024px){                    /* десктоп */
+  .work-list{grid-template-columns:repeat(3,1fr);}
+
+  /* ② Большие экраны: и ширина, и высота под контролем */
+  .banner{
+    width:90%;
+    max-width:1200px;                       /* best-practice 1200 px :contentReference[oaicite:5]{index=5} */
+    max-height:clamp(300px,50vh,500px);     /* гибкий «потолок» через clamp() :contentReference[oaicite:6]{index=6} */
+    object-fit:contain;                     /* без обрезки */
+    margin-inline:auto;
+  }
+}
+
+/* ===== светлая тема ===== */
 @media (prefers-color-scheme:light){
   :root{
     --clr-bg:#F0E5D2;
@@ -79,5 +88,6 @@ footer{text-align:center;padding:1rem;font-size:.875rem;}
   }
   .work-list a:hover{background:rgba(255,255,255,.9);}
 }
+
 
 
