@@ -1,4 +1,4 @@
-/* ===== базовые переменные (тёмная тема) ===== */
+/* ===== базовые переменные цвета (тёмная тема) ===== */
 :root{
   --clr-bg:#36230B;
   --clr-bg-light:#59401A;
@@ -20,11 +20,11 @@ body{
 /* ===== шапка ===== */
 .site-header{padding:1rem;text-align:center;}
 .banner{
-  /* базовое поведение — мобильный портрет: hero во всю ширину */
+  /* мобильный портрет (по умолчанию) */
   width:100%;
-  aspect-ratio:3/2;          /* держим пропорцию ⚙️  MDN :contentReference[oaicite:0]{index=0} */
+  aspect-ratio:3/2;           /* держим пропорцию */
   height:auto;
-  object-fit:cover;          /* лёгкий кроп — UX-стандарт для hero :contentReference[oaicite:1]{index=1} */
+  object-fit:cover;           /* лёгкий кроп, визуальный эффект */
   border-radius:1rem;
   box-shadow:0 4px 12px rgba(0,0,0,.4);
 }
@@ -48,29 +48,31 @@ main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
 footer{text-align:center;padding:1rem;font-size:.875rem;}
 
 /* ===== брейк-пойнты ===== */
-@media (min-width:768px){                     /* планшет */
+@media (min-width:768px){                    /* планшет */
   .work-list{grid-template-columns:repeat(2,1fr);}
 }
 
-/* ① Телефон/планшет в горизонтали: высота ≤ 50 vh, без кропа */
+/* ① Телефон / планшет в горизонтали */
 @media (orientation: landscape) and (max-width:1023px){
-  /* media-feature orientation поддерживается c 2015 г. :contentReference[oaicite:2]{index=2} */
   .banner{
-    max-height:50vh;          /* не больше половины экрана  :contentReference[oaicite:3]{index=3} */
-    object-fit:contain;       /* показываем картину целиком :contentReference[oaicite:4]{index=4} */
+    /* убираем жёсткую ширину и пропорцию */
+    width:auto;
+    max-width:90vw;           /* не шире экрана */
+    height:50vh;              /* не выше половины экрана */
+    aspect-ratio:auto;        /* позволяем естественной высоте */
+    object-fit:contain;       /* без кропа, поля исчезают */
+    margin-inline:auto;       /* центрируем */
   }
 }
 
-@media (min-width:1024px){                    /* десктоп */
+@media (min-width:1024px){                   /* десктоп */
   .work-list{grid-template-columns:repeat(3,1fr);}
-
-  /* ② Большие экраны: и ширина, и высота под контролем */
   .banner{
     width:90%;
-    max-width:1200px;                       /* best-practice 1200 px :contentReference[oaicite:5]{index=5} */
-    max-height:clamp(300px,50vh,500px);     /* гибкий «потолок» через clamp() :contentReference[oaicite:6]{index=6} */
-    object-fit:contain;                     /* без обрезки */
-    margin-inline:auto;
+    max-width:1200px;                       /* предел по ширине */
+    max-height:clamp(300px,50vh,500px);     /* гибкий «потолок» */
+    object-fit:contain;                     /* картинка целиком */
+    margin-inline:auto;                     /* центрируем */
   }
 }
 
@@ -88,6 +90,7 @@ footer{text-align:center;padding:1rem;font-size:.875rem;}
   }
   .work-list a:hover{background:rgba(255,255,255,.9);}
 }
+
 
 
 
