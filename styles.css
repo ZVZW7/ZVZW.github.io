@@ -1,4 +1,4 @@
-/* === тёмная палитра ===================================================== */
+/* === базовая палитра (тёмная тема) ===================================== */
 :root{
   --clr-bg:#36230B;
   --clr-bg-light:#59401A;
@@ -6,7 +6,7 @@
   --clr-text:#F5E9D8;
 }
 
-/* === сброс, базовый макет ============================================== */
+/* === reset & каркас ===================================================== */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Segoe UI',sans-serif;
@@ -14,17 +14,18 @@ body{
   background:linear-gradient(180deg,var(--clr-bg),var(--clr-bg-light));
   color:var(--clr-text);
   min-height:100vh;
-  display:flex;flex-direction:column;
+  display:flex;
+  flex-direction:column;
 }
 
-/* === шапка: мобильный портрет (по умолчанию) =========================== */
+/* === шапка — мобильный портрет ========================================= */
 .site-header{padding:1rem;text-align:center;}
 
 .banner{
-  width:100%;                 /* на узком экране во всю ширину */
-  aspect-ratio:3/2;           /* держим пропорцию */
+  width:100%;
+  aspect-ratio:3/2;
   height:auto;
-  object-fit:cover;           /* лёгкий кроп «кинозум» */
+  object-fit:cover;            /* «кинозум» — допускаем кроп */
   border-radius:1rem;
   box-shadow:0 4px 12px rgba(0,0,0,.4);
 }
@@ -40,57 +41,44 @@ main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
   background:rgba(0,0,0,.2);
   border:1px solid var(--clr-accent);
   border-radius:.75rem;
-  color:inherit;text-decoration:none;
+  color:inherit;
+  text-decoration:none;
   transition:background .2s;
 }
 .work-list a:hover{background:rgba(0,0,0,.4);}
 footer{text-align:center;padding:1rem;font-size:.875rem;}
 
-/* === планшет-портрет: сетка работ в 2 колонки =========================== */
+/* === планшет-портрет: сетка работ 2× =================================== */
 @media (min-width:768px){
   .work-list{grid-template-columns:repeat(2,1fr);}
 }
 
-/* === телефон / планшет в ЛАНДШАФТЕ (≤1023 px) ========================== */
-@media (orientation: landscape) and (max-width:1023px){
+/* === landscape-мобильный и десктоп ===================================== */
+@media (min-width:600px) and (orientation:landscape),
+       (min-width:1024px){
+
+  /* — супер-гибкая шапка на Grid — */
   .site-header{
-    display:flex;
+    display:grid;
+    grid-template-columns:auto 1fr; /* ширина первой колонки = ширина картинки */
+    gap:2rem;
     align-items:center;
-    gap:1rem;
     text-align:left;
   }
 
   .banner{
-    height:45vh;             /* фиксируем высоту */
-    width:auto;              /* ширину вычислит браузер => нет пустых полей */
-    flex:0 1 auto;           /* можно сжиматься, но не расти сверх контента */
-    max-width:60vw;          /* страховка на очень низких экранах */
-    aspect-ratio:auto;       /* СБРОС пропорции, иначе буквы */
-    object-fit:contain;      /* показываем картинку целиком */
+    height:45vh;            /* комфортный «потолок» */
+    width:auto;             /* ширину считается из высоты + аспекта */
+    aspect-ratio:auto;      /* сбрасываем фикс 3:2 → реальная ширина */
+    object-fit:contain;     /* показываем полностью, БЕЗ кропа */
   }
 
-  h1{flex:1 1 0;margin:0;}
+  h1{margin:0;}             /* заголовок вплотную к правой колонке */
 }
 
-/* === десктоп (≥1024 px) ================================================ */
-@media (min-width:1024px){
-  .site-header{
-    display:flex;
-    align-items:center;
-    gap:2rem;
-    text-align:left;
-  }
-
-  .banner{
-    height:45vh;               /* единое правило и для ноутбуков */
-    width:auto;
-    flex:0 1 auto;             /* ширина = реальная ширина картинки */
-    max-width:50%;             /* не более половины экрана */
-    aspect-ratio:auto;         /* убираем фиксированное соотношение */
-    object-fit:contain;        /* без кропа, без «писем» */
-  }
-
-  h1{flex:1 1 0;margin:0;}
+/* === десктоп > 1280: немного воздуха вокруг ============================ */
+@media (min-width:1280px){
+  .banner{max-height:420px;}
   .work-list{grid-template-columns:repeat(3,1fr);}
 }
 
@@ -108,6 +96,3 @@ footer{text-align:center;padding:1rem;font-size:.875rem;}
   }
   .work-list a:hover{background:rgba(255,255,255,.9);}
 }
-
-
-
