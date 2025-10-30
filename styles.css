@@ -6,7 +6,7 @@
   --clr-text:#F5E9D8;
 }
 
-/* ===== сброс и базовый макет ============================================ */
+/* ===== reset & базовый макет ============================================ */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Segoe UI',sans-serif;
@@ -17,19 +17,19 @@ body{
   display:flex;flex-direction:column;
 }
 
-/* ===== шапка (моб-портрет по умолчанию) ================================= */
+/* ===== шапка — мобильный портрет по умолчанию =========================== */
 .site-header{padding:1rem;text-align:center;}
 
 .banner{
   width:100%;
   aspect-ratio:3/2;
   height:auto;
-  object-fit:cover;                 /* «кинозум» */
+  object-fit:cover;                /* «кинозум» */
   border-radius:1rem;
   box-shadow:0 4px 12px rgba(0,0,0,.4);
 }
 
-h1{margin-top:.5rem;color:var(--clr-accent);}
+h1{margin:.5rem 0 0;color:var(--clr-accent);}   /* сброс нижних полей */
 
 /* ===== контент / футер ================================================== */
 main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
@@ -46,12 +46,12 @@ main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
 .work-list a:hover{background:rgba(0,0,0,.4);}
 footer{text-align:center;padding:1rem;font-size:.875rem;}
 
-/* ===== планшет (портрет) — 2 колонки работ ============================== */
+/* ===== планшет портрет ================================================== */
 @media (min-width:768px){
   .work-list{grid-template-columns:repeat(2,1fr);}
 }
 
-/* ===== телефон / планшет в ландшафте ==================================== */
+/* ===== телефон/планшет в ландшафте ===================================== */
 @media (orientation: landscape) and (max-width:1023px){
   .site-header{
     display:flex;
@@ -59,16 +59,19 @@ footer{text-align:center;padding:1rem;font-size:.875rem;}
     gap:1rem;
     text-align:left;
   }
+
   .banner{
-    flex:0 0 55%;                 /* ~55 % ширины экрана */
-    max-height:45vh;              /* не выше 45 % окна */
-    width:auto;
-    object-fit:contain;           /* без обрезки */
+    height:45vh;                 /* потолок по высоте — UX-гайд :contentReference[oaicite:1]{index=1} */
+    width:auto;                  /* ширину считает браузер */
+    flex:0 1 auto;               /* basis = auto, можно сжиматься/растягиваться :contentReference[oaicite:2]{index=2} */
+    max-width:60vw;              /* safety-предел по ширине */
+    object-fit:contain;          /* без кропа */
   }
-  h1{flex:1 1 0;}
+
+  h1{flex:1 1 0;margin:0;}       /* убираем отступы, занимаем правую колонку */
 }
 
-/* ===== десктоп (шире 1024) ============================================= */
+/* ===== десктоп (≥ 1024) ================================================= */
 @media (min-width:1024px){
   .site-header{
     display:flex;
@@ -76,13 +79,15 @@ footer{text-align:center;padding:1rem;font-size:.875rem;}
     gap:2rem;
     text-align:left;
   }
+
   .banner{
     flex:0 0 50%;
-    max-height:clamp(240px,45vh,420px);
+    max-height:clamp(240px,45vh,420px);   /* гибкий «потолок» */
     width:auto;
     object-fit:contain;
   }
-  h1{flex:1 1 0;}
+
+  h1{flex:1 1 0;margin:0;}
   .work-list{grid-template-columns:repeat(3,1fr);}
 }
 
