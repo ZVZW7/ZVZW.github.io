@@ -1,4 +1,4 @@
-/* ===== базовые переменные (тёмная тема) ===== */
+/* === тёмная палитра, сброс, базовая сетка ================================= */
 :root{
   --clr-bg:#36230B;
   --clr-bg-light:#59401A;
@@ -6,7 +6,6 @@
   --clr-text:#F5E9D8;
 }
 
-/* ===== reset & layout ===== */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Segoe UI',sans-serif;
@@ -17,21 +16,26 @@ body{
   display:flex;flex-direction:column;
 }
 
-/* ===== шапка ===== */
-.site-header{padding:1rem;text-align:center;}
+/* === шапка ================================================================ */
+.site-header{
+  padding:1rem;
+  text-align:center;            /* актуально для узких экранов */
+}
+
 .banner{
-  /* 1. Базовое (моб-портрет): hero во всю ширину, лёгкий кроп  */
   width:100%;
-  aspect-ratio:3/2;            /* держим пропорцию — свойство поддерживается всеми актуальными браузерами :contentReference[oaicite:2]{index=2} */
+  aspect-ratio:3/2;
   height:auto;
-  object-fit:cover;            /* cover заполняет блок без «пустых писем» :contentReference[oaicite:3]{index=3} */
+  object-fit:cover;             /* hero-эффект: заполняем, можно чуть обрезать */
   border-radius:1rem;
   box-shadow:0 4px 12px rgba(0,0,0,.4);
 }
+
 h1{margin-top:.5rem;color:var(--clr-accent);}
 
-/* ===== контент ===== */
+/* === основной контент ===================================================== */
 main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
+
 .works h2{margin-bottom:1rem;}
 .work-list{list-style:none;display:grid;gap:1rem;}
 .work-list a{
@@ -44,34 +48,37 @@ main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
 }
 .work-list a:hover{background:rgba(0,0,0,.4);}
 
-/* ===== футер ===== */
+/* === футер ================================================================ */
 footer{text-align:center;padding:1rem;font-size:.875rem;}
 
-/* ===== брейк-поинты ===== */
-@media (min-width:768px){                    /* планшет */
+/* === брейк-пойнты ========================================================= */
+/* планшет — сетка работ в 2 колонки */
+@media (min-width:768px){
   .work-list{grid-template-columns:repeat(2,1fr);}
 }
 
-/* 2. Телефон / планшет в горизонтали */
-@media (orientation: landscape) and (max-width:1023px){
-  .banner{
-    height:50vh;             /* не выше половины экрана :contentReference[oaicite:4]{index=4} */
-    object-fit:cover;        /* заполняем без полей */
+/* 1024+ — новая шапка: картинка 50 %, заголовок 50 % */
+@media (min-width:1024px){
+  .site-header{
+    display:grid;
+    grid-template-columns:1fr 1fr;   /* две равные колонки */  /* :contentReference[oaicite:2]{index=2} */
+    gap:2rem;
+    align-items:center;
+    text-align:left;                 /* заголовок влево */
   }
-}
 
-@media (min-width:1024px){                   /* десктоп */
+  .banner{
+    width:100%;                      /* ровно 50 % вьюпорта благодаря гриду */
+    max-width:none;
+    height:auto;
+    aspect-ratio:3/2;
+    object-fit:contain;              /* показываем целиком без кропа */  /* :contentReference[oaicite:3]{index=3} */
+  }
+
   .work-list{grid-template-columns:repeat(3,1fr);}
-  .banner{
-    width:90%;
-    max-width:1200px;                       /* рекомендуемый предел для hero :contentReference[oaicite:5]{index=5} */
-    max-height:clamp(300px,50vh,500px);     /* гибкий «потолок» через clamp() :contentReference[oaicite:6]{index=6} */
-    object-fit:cover;                       /* лёгкий кроп предпочительнее пустых полей */
-    margin-inline:auto;
-  }
 }
 
-/* ===== светлая тема ===== */
+/* === светлая тема ========================================================= */
 @media (prefers-color-scheme:light){
   :root{
     --clr-bg:#F0E5D2;
@@ -85,6 +92,7 @@ footer{text-align:center;padding:1rem;font-size:.875rem;}
   }
   .work-list a:hover{background:rgba(255,255,255,.9);}
 }
+
 
 
 
