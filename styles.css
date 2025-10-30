@@ -46,6 +46,30 @@ main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
 .work-list a:hover{background:rgba(0,0,0,.4);}
 footer{text-align:center;padding:1rem;font-size:.875rem;}
 
+/* === универсальная рамочка для любых изображений === */
+.framed{
+  border-radius:1rem;                 /* такое же скругление */
+  box-shadow:0 4px 12px rgba(0,0,0,.4);/* такая же тень      */
+  display:block;                      /* чтобы <img> не было inline */
+  max-width:100%;                     /* не выйдет за пределы колонки */
+  height:auto;                        /* сохраняет собственный размер */
+  object-fit:cover;                   /* можно contain, если важны края */
+}
+
+/* если хотите *точно* тот же «кинозум», добавьте и это —
+   тогда по умолчанию будет лёгкое масштабирование:       */
+/* .framed{object-fit:cover;} */
+
+/* ① сбросить оформление для миниатюр-ссылок */
+.work-list a.thumb{
+  background:none;
+  border:none;
+  padding:0;
+}
+
+/* ② (необязательно) сделать картинку кликабельной на всю область */
+.work-list a.thumb .framed{display:block;}
+
 /* === планшет-портрет: сетка работ 2× ================================== */
 @media (min-width:768px){
   .work-list{grid-template-columns:repeat(2,1fr);}
