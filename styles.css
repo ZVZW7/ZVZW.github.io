@@ -1,4 +1,4 @@
-/* ===== цвета (тёмная тема) ============================================== */
+/* ===== палитра (тёмная тема) ============================================ */
 :root{
   --clr-bg:#36230B;
   --clr-bg-light:#59401A;
@@ -6,7 +6,7 @@
   --clr-text:#F5E9D8;
 }
 
-/* ===== сброс и базовая сетка ============================================ */
+/* ===== сброс и базовый макет ============================================ */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Segoe UI',sans-serif;
@@ -17,27 +17,22 @@ body{
   display:flex;flex-direction:column;
 }
 
-/* ===== шапка ============================================================ */
-.site-header{
-  padding:1rem;
-  text-align:center;                /* моб. портрет */
-}
+/* ===== шапка (моб-портрет по умолчанию) ================================= */
+.site-header{padding:1rem;text-align:center;}
 
-/* — мобильный вид — */
 .banner{
   width:100%;
   aspect-ratio:3/2;
   height:auto;
-  object-fit:cover;                 /* лёгкий кроп — hero-эффект */
+  object-fit:cover;                 /* «кинозум» */
   border-radius:1rem;
   box-shadow:0 4px 12px rgba(0,0,0,.4);
 }
 
 h1{margin-top:.5rem;color:var(--clr-accent);}
 
-/* ===== контент ========================================================== */
+/* ===== контент / футер ================================================== */
 main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
-
 .works h2{margin-bottom:1rem;}
 .work-list{list-style:none;display:grid;gap:1rem;}
 .work-list a{
@@ -49,33 +44,45 @@ main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
   transition:background .2s;
 }
 .work-list a:hover{background:rgba(0,0,0,.4);}
-
-/* ===== футер ============================================================ */
 footer{text-align:center;padding:1rem;font-size:.875rem;}
 
-/* ===== брейк-пойнты ===================================================== */
-@media (min-width:768px){                         /* планшет */
+/* ===== планшет (портрет) — 2 колонки работ ============================== */
+@media (min-width:768px){
   .work-list{grid-template-columns:repeat(2,1fr);}
 }
 
-/* —— 1024+ — делим шапку на две колонки (Flex) —— */
+/* ===== телефон / планшет в ландшафте ==================================== */
+@media (orientation: landscape) and (max-width:1023px){
+  .site-header{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+    text-align:left;
+  }
+  .banner{
+    flex:0 0 55%;                 /* ~55 % ширины экрана */
+    max-height:45vh;              /* не выше 45 % окна */
+    width:auto;
+    object-fit:contain;           /* без обрезки */
+  }
+  h1{flex:1 1 0;}
+}
+
+/* ===== десктоп (шире 1024) ============================================= */
 @media (min-width:1024px){
   .site-header{
     display:flex;
     align-items:center;
-    justify-content:space-between;
     gap:2rem;
-    text-align:left;               /* переносим заголовок влево */
+    text-align:left;
   }
-
   .banner{
-    flex:0 0 50%;                  /* ровно половина ширины */
+    flex:0 0 50%;
     max-height:clamp(240px,45vh,420px);
-    width:auto;                    /* убираем 100 % */
-    object-fit:contain;            /* картинка полностью, без кропа */
+    width:auto;
+    object-fit:contain;
   }
-
-  h1{flex:1 1 0;}                  /* вторую половину занимает текст */
+  h1{flex:1 1 0;}
   .work-list{grid-template-columns:repeat(3,1fr);}
 }
 
@@ -93,7 +100,6 @@ footer{text-align:center;padding:1rem;font-size:.875rem;}
   }
   .work-list a:hover{background:rgba(255,255,255,.9);}
 }
-
 
 
 
