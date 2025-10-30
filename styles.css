@@ -1,4 +1,4 @@
-/* === базовая палитра (тёмная тема) ===================================== */
+/* === палитра =========================================================== */
 :root{
   --clr-bg:#36230B;
   --clr-bg-light:#59401A;
@@ -6,7 +6,7 @@
   --clr-text:#F5E9D8;
 }
 
-/* === reset & каркас ===================================================== */
+/* === сброс и базовый каркас =========================================== */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Segoe UI',sans-serif;
@@ -14,25 +14,24 @@ body{
   background:linear-gradient(180deg,var(--clr-bg),var(--clr-bg-light));
   color:var(--clr-text);
   min-height:100vh;
-  display:flex;
-  flex-direction:column;
+  display:flex;flex-direction:column;
 }
 
-/* === шапка — мобильный портрет ========================================= */
+/* === шапка: мобильный портрет (default) =============================== */
 .site-header{padding:1rem;text-align:center;}
 
 .banner{
   width:100%;
   aspect-ratio:3/2;
   height:auto;
-  object-fit:cover;            /* «кинозум» — допускаем кроп */
+  object-fit:cover;
   border-radius:1rem;
   box-shadow:0 4px 12px rgba(0,0,0,.4);
 }
 
 h1{margin:.5rem 0 0;color:var(--clr-accent);}
 
-/* === контент / футер ==================================================== */
+/* === основной контент / футер ========================================= */
 main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
 .works h2{margin-bottom:1rem;}
 .work-list{list-style:none;display:grid;gap:1rem;}
@@ -41,48 +40,50 @@ main{flex:1;width:min(90%,58rem);margin:auto;padding:2rem 0;}
   background:rgba(0,0,0,.2);
   border:1px solid var(--clr-accent);
   border-radius:.75rem;
-  color:inherit;
-  text-decoration:none;
+  color:inherit;text-decoration:none;
   transition:background .2s;
 }
 .work-list a:hover{background:rgba(0,0,0,.4);}
 footer{text-align:center;padding:1rem;font-size:.875rem;}
 
-/* === планшет-портрет: сетка работ 2× =================================== */
+/* === планшет-портрет: сетка работ 2× ================================== */
 @media (min-width:768px){
   .work-list{grid-template-columns:repeat(2,1fr);}
 }
 
-/* === landscape-мобильный и десктоп ===================================== */
-@media (min-width:600px) and (orientation:landscape),
+/* === общий расклад для landscape-мобайла И десктопа =================== */
+@media (orientation:landscape) and (max-width:1023px),
        (min-width:1024px){
 
-  /* — супер-гибкая шапка на Grid — */
+  /* 1️⃣   двухколоночная шапка  */
   .site-header{
     display:grid;
-    grid-template-columns:auto 1fr; /* ширина первой колонки = ширина картинки */
+    grid-template-columns:max-content 1fr; /* ширина первой == реальной ширине img */
     gap:2rem;
     align-items:center;
     text-align:left;
   }
 
+  /* 2️⃣   сам баннер — высота фиксирована, ширина высчитывается
+           + запрещаем растяжение по строке        */
   .banner{
-    height:45vh;            /* комфортный «потолок» */
-    width:auto;             /* ширину считается из высоты + аспекта */
-    aspect-ratio:auto;      /* сбрасываем фикс 3:2 → реальная ширина */
-    object-fit:contain;     /* показываем полностью, БЕЗ кропа */
+    height:45vh;
+    width:auto;
+    aspect-ratio:auto;       /* сброс 3/2 → берём реальное      */
+    object-fit:contain;      /* показываем целиком, без кропа    */
+    justify-self:start;      /* <-- ключ: не растягиваться!      */
+    max-width:50vw;          /* лимит на сверх-широких мониторах */
   }
 
-  h1{margin:0;}             /* заголовок вплотную к правой колонке */
+  h1{margin:0;}
 }
 
-/* === десктоп > 1280: немного воздуха вокруг ============================ */
+/* === десктоп >1280 — 3 колонки работ ================================== */
 @media (min-width:1280px){
-  .banner{max-height:420px;}
   .work-list{grid-template-columns:repeat(3,1fr);}
 }
 
-/* === светлая тема ======================================================= */
+/* === светлая тема ===================================================== */
 @media (prefers-color-scheme:light){
   :root{
     --clr-bg:#F0E5D2;
